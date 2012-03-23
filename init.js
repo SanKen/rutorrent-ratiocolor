@@ -39,7 +39,7 @@ colors = [  [100, 0, 0],
 // font
 changeWhat = "font";
 
-settings = true; // not yet working as it should
+settings = false; // not yet working as it should
 boldfont = true;
 
          
