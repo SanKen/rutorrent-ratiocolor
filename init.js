@@ -15,23 +15,33 @@ plugin.loadMainCSS();
 
 /*** Settings ***/
 // Diffrent color between diffrents levels. First level must be 0.
-levels = [0, 1, 3, 30];
+levels = [0.00, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2.1];
 
 // Colors of the diffrent levels. [r, g, b]
-colors = [  [255, 0, 0],
-            [255, 255, 0],
-            [0, 255, 0],
-            [123, 17, 203]
-         ];
+colors = [  [100, 0, 0],
+            			[255, 0, 0],
+				[255, 51, 0],
+				[255, 153, 0],
+				[255, 204, 0],
+				[255, 255, 0],
+				[255, 255, 153],
+				[204, 255, 0],
+				[153, 204, 102],
+				[153, 255, 51],
+				[102, 255, 0],
+				[50, 50, 255]
+			];
 
 //changeWhatEnum = ["cell-background", "font"];
 
 // what to change:
 // cell-background
 // font
-changeWhat = "cell-background";
+changeWhat = "font";
 
-settings = false; // not yet working as it should
+settings = true; // not yet working as it should
+boldfont = true;
+
          
 /* Example
 If ratio is 0 the color will be the first definde color. The the more the ratio approach
@@ -76,22 +86,25 @@ theWebUI.setRatioColors = function(){
             }
         });
        
-        if(color === null){
+        if(color == null){
             color = colors[colors.length - 1];
         }
         
         switch(changeWhat)
         {
             case "font":
-                $(this).css("color", colorRGB(color));  
+                $(this).css("color", colorRGB(color));
+				if(boldfont) {
+					$(this).css("font-weight", "bold");
+				}
                 break;
             case "cell-background":
             default:
                 $(this).css("background-color", colorRGB(color));  
-                $(this).css("background-image", "none");
                 break;
         }
     });
+    
 };
 
 plugin.onLangLoaded = function() {
@@ -163,7 +176,5 @@ theWebUI.updateRatiocolorsLevelsBar = function(levels, colors)
 
 plugin.onRemove = function()
 {
-    if(settings){
-        this.removePageFromOptions("st_ratiocolors");
-    }
+    this.removePageFromOptions("st_ratiocolors");
 }
